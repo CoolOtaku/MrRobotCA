@@ -15,8 +15,5 @@ class AutomatonController:
             cell.is_active = True
             self.robot_model.turn_right()
 
-        # Update View
         self.cell_views[(x, y)].update_color(cell.is_active)
-
-        # Move robot
         self.robot_model.move_forward()
