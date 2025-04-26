@@ -4,17 +4,17 @@ from src.views.cell_view import CellView
 
 
 class GridView(GridLayout):
-    def __init__(self, grid_size, **kwargs):
+    def __init__(self, model, **kwargs):
         super().__init__(**kwargs)
-        self.cols = grid_size
-        self.rows = grid_size
-        self.cell_models = {}
-        self.cell_views = {}
+        self.model = model
+        self.rows = model.rows
+        self.cols = model.cols
 
         for y in range(self.rows):
             for x in range(self.cols):
-                model = CellModel(x, y)
-                view = CellView(model)
-                self.cell_models[(x, y)] = model
-                self.cell_views[(x, y)] = view
-                self.add_widget(view)
+                cell_model = CellModel(x, y)
+                cell_view = CellView(cell_model)
+
+                self.model.set_cell(x, y, cell_model, cell_view)
+
+                self.add_widget(cell_view)
