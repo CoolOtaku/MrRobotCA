@@ -1,12 +1,13 @@
 from kivy.uix.floatlayout import FloatLayout
 
-from src.views.cell_view import CellView
-from src.views.grid_view import GridView
 from src.views.robot_view import RobotView
+from src.views.grid_view import GridView
+from src.views.cell_view import CellView
 
 
 class FieldView(FloatLayout):
     def __init__(self, model, **kwargs):
+        """Приймає модель та ініціалізує супер клас."""
         super().__init__(**kwargs)
 
         self.grid_view = GridView(model)
@@ -15,11 +16,6 @@ class FieldView(FloatLayout):
         self.grid_view.pos_hint = {'top': 1}
         self.add_widget(self.grid_view)
 
-        """self.robot_view = RobotView(source='robot.png', width=50, height=50)
-        self.robot_view.pos = (0, 0)  # початкова позиція
-        self.add_widget(self.robot_view)"""
-
-    def move_robot_to_cell(self, x, y, cell_width, cell_height):
-        new_x = x * cell_width
-        new_y = y * cell_height
-        self.robot_view.pos = (new_x, new_y)
+        self.robot_view = RobotView()
+        self.robot_view.pos = (0, 0)
+        self.add_widget(self.robot_view)

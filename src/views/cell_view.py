@@ -6,14 +6,13 @@ class CellView(Widget):
     cell_size = 20
 
     def __init__(self, model, **kwargs):
+        """Приймає модель та ініціалізує супер клас."""
         super().__init__(**kwargs)
         self.model = model
 
-        """Задає розмір."""
         self.size_hint = (None, None)
-        self.size = (20, 20)
+        self.size = (self.cell_size, self.cell_size)
 
-        """Задає дефолтний колір."""
         with self.canvas:
             self.color = Color(1, 1, 1, 1)
             self.rect = Rectangle(pos=self.pos, size=self.size)

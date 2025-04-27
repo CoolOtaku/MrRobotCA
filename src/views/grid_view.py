@@ -8,6 +8,7 @@ class GridView(GridLayout):
     grid_size = 30
 
     def __init__(self, model, **kwargs):
+        """Приймає модель та ініціалізує супер клас."""
         super().__init__(**kwargs)
         self.model = model
         self.rows = model.rows
