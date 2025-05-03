@@ -7,7 +7,7 @@ class AutomatonController:
     def step(self):
         """Метод одного ходу описаного алгоритму."""
         x, y = self.robot_model.x, self.robot_model.y
-        cell = self.grid_model.get_cell(x, y)
+        cell = self.grid_model.get_cell(x, y)[0]
 
         if cell.is_active:
             cell.is_active = False

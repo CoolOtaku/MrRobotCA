@@ -20,6 +20,6 @@ class ToggleVisibilityButton(ButtonBehavior, Image):
     def update_icon(self):
         """Оновляє іконку."""
         if self.robot_view.is_visible:
-            self.source = 'assets/hide.png'
-        else:
             self.source = 'assets/show.png'
+        else:
+            self.source = 'assets/hide.png'
