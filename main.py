@@ -69,6 +69,7 @@ class CellularAutomatonApp(App):
         theme_selector.set_theme(self.theme_controller.get_default_theme())
         self.root.add_widget(theme_selector)
 
+        # Повернення готового вікна.
         return self.root
 
     def step(self, *args):

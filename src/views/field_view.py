@@ -32,6 +32,7 @@ class FieldView(FloatLayout):
         self.add_widget(self.robot_view)
 
     def set_theme(self, theme):
+        """Ставить тему для віджета і його дочірніх віджетів."""
         if not isinstance(theme.background_cell_active, tuple) and os.path.exists(theme.background_cell_active):
             CellView.active_bg = CoreImage(theme.background_cell_active).texture
             CellView.inactive_bg = CoreImage(theme.background_cell_inactive).texture
