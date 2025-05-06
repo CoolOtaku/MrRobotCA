@@ -4,10 +4,10 @@ import time
 from kivy.clock import Clock
 
 
-class AutoStepController:
-    def __init__(self, step_function, interval=0.5):
-        """Приймає параметри."""
-        self.step_function = step_function
+class DebugController:
+    def __init__(self, robot_model, interval=0.5):
+        """Приймає модель та параметри."""
+        self.robot_model = robot_model
         self.interval = interval
 
         self.running = False
@@ -28,4 +28,8 @@ class AutoStepController:
         """Цикл виконання."""
         while self.running:
             time.sleep(self.interval)
-            Clock.schedule_once(lambda dt: self.step_function())
+            Clock.schedule_once(lambda dt: self.update_robot_position())
+
+    def update_robot_position(self):
+        """Зміна позиції робота."""
+        print(f"{self.robot_model.x},\n{self.robot_model.y}")

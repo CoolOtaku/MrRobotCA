@@ -1,9 +1,11 @@
 import os
 
 from kivy.core.image import Image as CoreImage
-from kivy.uix.image import Image
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.image import Image
+from kivy.app import App
 
+from src.views.test.debug_grid_view import DebugGridView
 from src.views.robot_view import RobotView
 from src.views.grid_view import GridView
 from src.views.cell_view import CellView
@@ -22,14 +24,16 @@ class FieldView(FloatLayout):
         self.add_widget(self.bg)
 
         self.grid_view = GridView(model)
-        self.grid_view.size_hint = (None, None)
-        self.grid_view.size = (model.cols * CellView.cell_size, model.rows * CellView.cell_size)
-        self.grid_view.pos_hint = {'top': 1}
         self.add_widget(self.grid_view)
 
         self.robot_view = RobotView()
-        self.robot_view.pos = (0, 0)
         self.add_widget(self.robot_view)
+
+        if App.get_running_app().is_debug_mode:
+            self.debug_grid = DebugGridView(model.rows, model.cols)
+            self.debug_grid.size = self.grid_view.size
+            self.debug_grid.pos = self.grid_view.pos
+            self.add_widget(self.debug_grid)
 
     def set_theme(self, theme):
         """Ставить тему для віджета і його дочірніх віджетів."""

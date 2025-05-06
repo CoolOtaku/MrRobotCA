@@ -11,6 +11,7 @@ class RobotView(Widget):
         """Приймає параметри та ініціалізує супер клас."""
         super(RobotView, self).__init__(**kwargs)
         self.size_hint = (None, None)
+        self.pos = (0, 0)
 
         self.robot_image = Image(
             source=self.source,

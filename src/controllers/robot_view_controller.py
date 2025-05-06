@@ -1,7 +1,7 @@
-from kivy.clock import Clock
-
 import threading
 import time
+
+from kivy.clock import Clock
 
 from src.models.robot_model import Directions
 from src.views.cell_view import CellView
@@ -13,8 +13,6 @@ class RobotViewController:
         self.robot_model = robot_model
         self.robot_view = robot_view
         self.model_rows = model_rows
-        self.cell_width = CellView.cell_size
-        self.cell_height = CellView.cell_size
         self.interval = interval
 
         self.running = False
@@ -39,8 +37,8 @@ class RobotViewController:
 
     def update_robot_position(self):
         """Зміна позиції робота."""
-        new_x = self.robot_model.x * self.cell_width
-        new_y = (self.model_rows + 4 - self.robot_model.y) * self.cell_height
+        new_x = (self.robot_model.x * CellView.cell_size) - (CellView.cell_size // 1.5)
+        new_y = (self.model_rows + 4 - self.robot_model.y) * CellView.cell_size
 
         self.robot_view.pos = (new_x, new_y)
 

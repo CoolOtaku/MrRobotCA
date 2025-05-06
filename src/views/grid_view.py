@@ -11,8 +11,13 @@ class GridView(GridLayout):
         """Приймає модель та ініціалізує супер клас."""
         super().__init__(**kwargs)
         self.model = model
+
         self.rows = model.rows
         self.cols = model.cols
+
+        self.size_hint = (None, None)
+        self.size = (self.cols * CellView.cell_size, self.rows * CellView.cell_size)
+        self.pos_hint = {'top': 1}
 
         for y in range(self.rows):
             for x in range(self.cols):

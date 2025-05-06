@@ -16,9 +16,9 @@ class GridModel:
         return self.cell_models[(x, y)], self.cell_views[(x, y)]
 
     def get_cells(self):
+        """Повертає усі клітинки."""
         res = []
         for y in range(self.rows):
             for x in range(self.cols):
                 res.append(self.get_cell(x, y))
-
         return tuple(res)

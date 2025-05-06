@@ -2,8 +2,9 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 
-from src.views.ui.theme_drop_down_selector import ThemeDropDownSelector
+from src.controllers.test.debug_controller import DebugController
 from src.views.ui.toggle_visibility_button import ToggleVisibilityButton
+from src.views.ui.theme_drop_down_selector import ThemeDropDownSelector
 from src.controllers.robot_view_controller import RobotViewController
 from src.controllers.automaton_controller import AutomatonController
 from src.controllers.аuto_step_controller import AutoStepController
@@ -18,6 +19,8 @@ from src.views.cell_view import CellView
 
 
 class CellularAutomatonApp(App):
+    is_debug_mode = True
+
     def __init__(self, **kwargs):
         """Ініціалізація контролерів та супер класу."""
         super().__init__(**kwargs)
@@ -63,6 +66,11 @@ class CellularAutomatonApp(App):
         self.robot_view_controller = RobotViewController(robot_model, field_view.robot_view, grid_model.rows)
         self.theme_controller = ThemeController(Window, button_container, field_view)
         self.robot_view_controller.start()
+
+        # Якщо увімкнений режим налагодження.
+        if self.is_debug_mode:
+            debug_controller = DebugController(robot_model)
+            debug_controller.start()
 
         # Створення та додавання до контейнера віджета з темами.
         theme_selector = ThemeDropDownSelector(self.theme_controller)
