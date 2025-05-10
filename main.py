@@ -1,13 +1,15 @@
+import sys
+
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 
-from src.controllers.test.debug_controller import DebugController
 from src.views.ui.toggle_visibility_button import ToggleVisibilityButton
 from src.views.ui.theme_drop_down_selector import ThemeDropDownSelector
 from src.controllers.robot_view_controller import RobotViewController
 from src.controllers.automaton_controller import AutomatonController
 from src.controllers.аuto_step_controller import AutoStepController
+from src.controllers.test.debug_controller import DebugController
 from src.views.ui.button_container import ButtonContainerView
 from src.controllers.theme_controller import ThemeController
 from src.views.ui.button_view import ButtonView
@@ -19,7 +21,7 @@ from src.views.cell_view import CellView
 
 
 class CellularAutomatonApp(App):
-    is_debug_mode = True
+    is_debug_mode = False
 
     def __init__(self, **kwargs):
         """Ініціалізація контролерів та супер класу."""
@@ -48,10 +50,8 @@ class CellularAutomatonApp(App):
         button_container = ButtonContainerView(size_hint=(1, 0.1))
         step_button = ButtonView(text="Крок")
         step_button.bind(on_press=self.step)
-
         auto_button = ButtonView(text="Авто")
         auto_button.bind(on_press=self.toggle_auto)
-
         visible_button = ToggleVisibilityButton(field_view.robot_view)
 
         # Додавання кнопок до контейнера.
@@ -92,4 +92,10 @@ class CellularAutomatonApp(App):
             self.auto_step_controller.start()
 
 if __name__ == "__main__":
-    CellularAutomatonApp().run()
+    # Перевірка аргументів командного рядка
+    debug = 'debug' in sys.argv
+
+    # Запуск програми
+    app = CellularAutomatonApp()
+    app.is_debug_mode = debug
+    app.run()
