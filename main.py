@@ -4,6 +4,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 
+from src.controllers.startup_condition_controller import StartupConditionController
 from src.views.ui.toggle_visibility_button import ToggleVisibilityButton
 from src.views.ui.theme_drop_down_selector import ThemeDropDownSelector
 from src.controllers.robot_view_controller import RobotViewController
@@ -30,6 +31,7 @@ class CellularAutomatonApp(App):
         self.auto_step_controller = None
         self.robot_view_controller = None
         self.theme_controller = None
+        self.startup_condition_controller = None
 
     def build(self):
         """Ініцілізація вікна та його конфігурація."""
@@ -63,9 +65,9 @@ class CellularAutomatonApp(App):
         # Створення та запуск контролерів.
         self.automaton_controller = AutomatonController(grid_model, robot_model)
         self.auto_step_controller = AutoStepController(self.step)
-        self.robot_view_controller = RobotViewController(robot_model, field_view.robot_view, grid_model.rows)
+        self.robot_view_controller = RobotViewController(robot_model, field_view.robot_view, grid_model.rows).start()
         self.theme_controller = ThemeController(Window, button_container, field_view)
-        self.robot_view_controller.start()
+        self.startup_condition_controller = StartupConditionController(grid_model, robot_model, sys.argv).apply()
 
         # Якщо увімкнений режим налагодження.
         if self.is_debug_mode:
